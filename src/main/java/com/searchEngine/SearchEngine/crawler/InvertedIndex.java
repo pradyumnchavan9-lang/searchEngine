@@ -2,16 +2,21 @@ package com.searchEngine.SearchEngine.crawler;
 
 import com.searchEngine.SearchEngine.entity.MyDocument;
 import com.searchEngine.SearchEngine.entity.Query;
+import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
+@Data
 public class InvertedIndex {
 
     private Map<String,Map<String,Double>> invertedIndex;
-    private int totalDocuments = 0;
+    private int totalDocuments ;
 
     public InvertedIndex(){
         this.invertedIndex = new HashMap<>();
+        totalDocuments = 0;
     }
 
     public void addDocumentToInvertedIndex(String docId, Map<String,Double> normalizedTermFrequency){

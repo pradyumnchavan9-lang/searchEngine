@@ -3,6 +3,7 @@ package com.searchEngine.SearchEngine.crawler;
 import com.searchEngine.SearchEngine.entity.MyDocument;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +14,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
+
+@Component
 public class FetchHtml {
 
-    public String fetchHtml(String urlString) throws IOException {
+    public String fetcher(String urlString) throws IOException {
 
 
         StringBuilder html = new StringBuilder();

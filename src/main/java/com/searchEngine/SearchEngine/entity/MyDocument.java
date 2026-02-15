@@ -23,4 +23,5 @@ public class MyDocument {
     public Map<String,Double> tfIdf = new HashMap<>();
     public Double tfIdfVectorMagnitude;
 
+
 }

@@ -1,16 +1,19 @@
 package com.searchEngine.SearchEngine.crawler;
 
 import com.searchEngine.SearchEngine.entity.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class QueryPreprocessing {
 
-    private final TextPreprocessor textPreprocessor;
-    private final InvertedIndex invertedIndex;
 
-    public QueryPreprocessing(TextPreprocessor textPreprocessor, InvertedIndex invertedIndex) {
-        this.textPreprocessor = textPreprocessor;
-        this.invertedIndex = invertedIndex;
-    }
+    @Autowired
+    private  TextPreprocessor textPreprocessor;
+    @Autowired
+    private  InvertedIndex invertedIndex;
+
+
 
     public Query preprocessQuery(String query){
         Query finalQuery = new Query();
@@ -21,6 +24,7 @@ public class QueryPreprocessing {
                 finalQuery.getQueryTokens().size()
         ));
         invertedIndex.calculateTfIdfForQuery(finalQuery);
+
 
         return finalQuery;
     }
