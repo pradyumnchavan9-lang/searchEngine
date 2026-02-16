@@ -37,7 +37,11 @@ public class RunCrawler {
 
 
         List<String> urls = new ArrayList<>(Arrays.asList(
-                "http://quotes.toscrape.com/"
+                "//news.ycombinator.com/",
+                "https://www.wikipedia.org/",
+                "https://github.com/trending",
+                "https://www.bbc.com/news",
+                "https://stackoverflow.com/"
         ));
 
         List<MyDocument> myDocs = new ArrayList<>();

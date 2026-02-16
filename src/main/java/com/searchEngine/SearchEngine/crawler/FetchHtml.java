@@ -25,6 +25,9 @@ public class FetchHtml {
 
         //1:Accept a String as the parameter
         //2:Convert to URL object
+        if(urlString.startsWith("//")){
+            urlString = "https:" + urlString;
+        }
         URL url = new URL(urlString);
 
         //3:Open Http Connection using the url object
