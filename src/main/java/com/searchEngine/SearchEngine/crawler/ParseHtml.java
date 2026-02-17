@@ -23,11 +23,31 @@ public class ParseHtml {
         //Remove junk
         doc.select("script,style,noscript").remove();
 
-        //Extract Text
-        String cleanText = doc.body() !=null ?doc.body().text() : "";
+        //Extract Text and Summary
+        doc.body();
+        String cleanText = doc.body().text();
+
+        Element meta = doc.select("meta[name = description]").first();
+        String summary = "";
+
+        if(meta != null && !meta.attr("content").isEmpty()){
+            summary = meta.attr("content");
+        }else{
+            summary = cleanText;
+        }
+
+        int maxLength = 50;
+        if(summary.length() > maxLength){
+            int lastSpace = summary.lastIndexOf("",maxLength);
+            summary = summary.substring(0,lastSpace) + "...";
+        }
+
 
         //Extract Links
         Elements elements = doc.select("a[href]");
+
+        //Extract title
+        String title = doc.title();
 
         Set<String> result = new HashSet<>();
 
@@ -41,6 +61,8 @@ public class ParseHtml {
 
         parsedPage.setTextContent(cleanText);
         parsedPage.setOutGoingLinks(result);
+        parsedPage.setTitle(title);
+        parsedPage.setSummary(summary);
 
         return parsedPage;
     }

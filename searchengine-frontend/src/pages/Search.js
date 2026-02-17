@@ -5,16 +5,26 @@ import "./Search.css";
 const Search = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      const response = await api.post("/search", { query: input }, {
-        headers: { "Content-Type": "application/json" }
-      });
+      const response = await api.post(
+        "/query",
+        { query: input },
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+
       setResults(response.data);
     } catch (error) {
       console.error("Search API error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -28,15 +38,51 @@ const Search = () => {
           onChange={(e) => setInput(e.target.value)}
           className="search-input"
         />
-        <button type="submit" className="search-button">Search</button>
+
+        <button
+          type="submit"
+          className="search-button"
+          disabled={loading}
+        >
+          {loading ? "Searching..." : "Search"}
+        </button>
       </form>
 
       <div className="results">
+        {!loading && results.length > 0 && (
+          <p className="results-info">
+            About {results.length} results
+          </p>
+        )}
+
+        {loading && (
+          <p className="loading-text">Searching...</p>
+        )}
+
+        {!loading && results.length === 0 && input && (
+          <p className="no-results">No results found</p>
+        )}
+
         {results.map((result, index) => (
           <div key={index} className="result-item">
-            <a href={result.myDoc.url} target="_blank" rel="noopener noreferrer">
-              {result.myDoc.url}
+            <a
+              href={result.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="result-title"
+            >
+              {result.title}
             </a>
+
+            <p className="result-url">
+              {new URL(result.url).hostname.replace("www.", "")}
+            </p>
+
+            <p className="result-snippet">
+              {result.summary?.length > 160
+                ? result.summary.slice(0, 160) + "..."
+                : result.summary}
+            </p>
           </div>
         ))}
       </div>

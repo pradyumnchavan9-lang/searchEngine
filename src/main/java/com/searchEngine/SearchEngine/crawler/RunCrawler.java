@@ -38,10 +38,7 @@ public class RunCrawler {
 
         List<String> urls = new ArrayList<>(Arrays.asList(
                 "//news.ycombinator.com/",
-                "https://www.wikipedia.org/",
-                "https://github.com/trending",
-                "https://www.bbc.com/news",
-                "https://stackoverflow.com/"
+                "https://www.wikipedia.org/"
         ));
 
         List<MyDocument> myDocs = new ArrayList<>();
@@ -74,6 +71,8 @@ public class RunCrawler {
                     // Now we add id,url,tokens,termFrequency,normalizedFrequency to our doc
                     MyDocument myDocument = new MyDocument();
                     myDocument.setUrl(urlId);
+                    myDocument.setTitle(parsedPage.getTitle());
+                    myDocument.setSummary(parsedPage.getSummary());
                     myDocument.setUrl(currUrl);
                     myDocument.setTokens(finalTokens);
                     myDocument.setTermFrequency(termFrequency);

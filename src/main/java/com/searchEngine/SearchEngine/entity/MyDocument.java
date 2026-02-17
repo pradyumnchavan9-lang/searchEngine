@@ -17,11 +17,13 @@ public class MyDocument {
     String docId;
     String url;
 
-    public List<String> tokens = new ArrayList<>();
-    public Map<String,Integer> termFrequency = new HashMap<>();
-    public Map<String,Double> normalizedTermFrequency = new HashMap<>();
-    public Map<String,Double> tfIdf = new HashMap<>();
-    public Double tfIdfVectorMagnitude;
+    private List<String> tokens = new ArrayList<>();
+    private Map<String,Integer> termFrequency = new HashMap<>();
+    private Map<String,Double> normalizedTermFrequency = new HashMap<>();
+    private Map<String,Double> tfIdf = new HashMap<>();
+    private Double tfIdfVectorMagnitude;
+    private String title;
+    private String summary;
 
 
 }

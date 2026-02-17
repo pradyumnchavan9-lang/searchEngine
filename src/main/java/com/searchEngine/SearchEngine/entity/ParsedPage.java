@@ -10,6 +10,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class ParsedPage {
 
-    String textContent;
-    Set<String> outGoingLinks = new HashSet<>();
+    private String textContent;
+    private Set<String> outGoingLinks = new HashSet<>();
+    private String title;
+    private String summary;
 }
