@@ -1,0 +1,31 @@
+# docker-compose.yml
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: search-backend
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./searchengine-frontend
+      dockerfile: Dockerfile
+    container_name: search-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+#  search-service:
+#    build: ./searchengine-search
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - crawler-service
+
+#  crawler-service:
+#    build: ./searchengine-crawler
+#    ports:
+#      - "8082:8082"
